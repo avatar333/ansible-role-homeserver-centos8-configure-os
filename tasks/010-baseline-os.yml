@@ -1,0 +1,43 @@
+---
+
+- import_tasks: 011-create-repos.yml
+  tags: create-repos
+
+- name: Update OS
+  yum:
+    name: "*"
+    state: latest
+  when: full_update_os
+
+# Install additional packages for general administration usage
+- name: Install general additional packages"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+
+- name: Install role specific packages - nginx
+  yum:
+    name: nginx
+    state: latest
+  when: is_webserver
+
+- name: "Restart chrony"
+  systemd:
+    name: chronyd
+    state: restarted
+    enabled: true
+
+- name: "set -o vi"
+  lineinfile:
+    path: /etc/profile
+    insertafter: EOF
+    line: 'set -o vi'
+
+- name: If laptop, prevent suspend on lid close
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    backup: true
+    line: "#HandleLidSwitch=suspend"
+    regexp: "^#?HandleLidSwitch=ignore"
+  when: is_laptop
+

@@ -1,0 +1,1 @@
+- install : epel-release, lm_sensors, podman (if 'install_podman' = true)

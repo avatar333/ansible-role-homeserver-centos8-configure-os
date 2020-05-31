@@ -1,2 +1,60 @@
 ---
 # defaults file for .
+
+full_update_os: false
+
+install_plexmediaserver: false
+
+is_laptop: false
+is_webserver: false
+
+packages:
+  - screen
+  - rsync
+  - wget
+  - htop
+  - bind-utils
+  - nmap-ncat
+  - chrony
+  - sysstat
+  - telnet
+  - bind-utils
+  - nmap
+  - drpm
+  - gcc
+  - gcc-c++
+  - policycoreutils-python-utils
+  - bash-completion
+  - mlocate
+  - python3-certbot
+  - ncompress
+  - git
+  - perl-Net-CIDR.noarch
+  - httpd-tools
+  - psmisc
+  - ftp
+  - ntfsprogs.x86_64
+  - ntfs-3g.x86_64
+  - psmisc
+  - lsof
+  - vim
+  - symlinks
+  - smartmontools
+  - net-tools
+  - ffmpeg
+
+firewall_ports:
+  - 32400/tcp # Plex
+  - 8112/tcp # Deluge
+  - 8989/tcp # Sonarr
+  - 8080/tcp # Sabnzbd HTTP
+  - 9090/tcp # Sabnzbd HTTPS
+  - 8090/tcp # Mylar
+  - 8000/tcp # Munin
+  - 5800/tcp # JDownloader-2
+  - 4949/tcp # munin-node
+  - 7878/tcp # Radarr
+  - 514/udp  # DNS
+  - 514/tcp  # DNS
+  - 8585/tcp
+  - 9100/tcp # Prometheus Node Exporter

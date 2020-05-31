@@ -1,0 +1,27 @@
+---
+
+- name: "SELinux httpd_can_network_connect on, to allow for NGINX web redirects"
+  command:
+    setsebool -P httpd_can_network_connect on
+
+- name: "Allow root login only on console"
+  lineinfile:
+    path: /etc/securetty
+    state: present
+    insertafter: EOF
+    line: tty1
+  when: ansible_facts['distribution_major_version'] | lower == "7"
+
+- name: "Secure root home"
+  file:
+    path: /root
+    state: directory
+    mode: 0700
+
+- name: "Open relevant firewalld service ports"
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    immediate: true
+    state: enabled
+  loop: "{{ firewall_ports }}"

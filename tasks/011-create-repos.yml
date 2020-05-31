@@ -1,0 +1,16 @@
+- name: Enable repo - EPEL
+  yum:
+    name: epel-release
+    state: present
+
+- name: Enable repo - Plex Media Server
+  copy:
+    dest: /etc/yum.repos.d/plexmediaserver.repo
+    content: |
+      [PlexRepo]
+      name=PlexRepo
+      baseurl=https://downloads.plex.tv/repo/rpm/$basearch/
+      enabled=1
+      gpgkey=https://downloads.plex.tv/plex-keys/PlexSign.key
+      gpgcheck=1
+  when: install_plexmediaserver

@@ -1,2 +1,15 @@
 ---
 # tasks file for .
+
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+      skip: true
+
+- import_tasks: 010-baseline-os.yml
+
+- import_tasks: 020-configure-security.yml
+  tags: configure-security
