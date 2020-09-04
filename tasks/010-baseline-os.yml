@@ -1,5 +1,11 @@
 ---
 
+- name: Create /etc/resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    backup: true
+
 - import_tasks: 011-create-repos.yml
   tags: create-repos
 
@@ -40,4 +46,5 @@
     line: "#HandleLidSwitch=suspend"
     regexp: "^#?HandleLidSwitch=ignore"
   when: is_laptop
+
 

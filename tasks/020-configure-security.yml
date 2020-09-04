@@ -25,3 +25,4 @@
     immediate: true
     state: enabled
   loop: "{{ firewall_ports }}"
+  when: is_docker_host

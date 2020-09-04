@@ -32,3 +32,4 @@ packages:
     - smartmontools
     - net-tools
     - iperf3
+    - iproute-tc
